@@ -142,42 +142,42 @@ document.getElementById('payment').addEventListener('change', event => {
 form.addEventListener("submit", e => {
     event.preventDefault()
 
-    function checkName() {
-        const nameValue = nameField.value;
-        const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
-        if (!nameIsValid) {
-            const p = document.createElement('p');
-            p.className = 'warning';
-            legendElement.insertAdjacentElement("afterend", p);
-            const warning = document.querySelector('.warning')
-            warning.innerHTML = `Please provide your correct name`;
-            warning.style.color = 'red';
-            console.log(`name is not valid`);
-            legendElement.style.color = 'red';
-            // legendElement.innerHTML = `Basic Info (incorrect name field)`;
-        }
-        return nameIsValid;
-    }
+    // function checkName() {
+    //     const nameValue = nameField.value;
+    //     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
+    //     if (!nameIsValid) {
+    //         const p = document.createElement('p');
+    //         p.className = 'warning';
+    //         legendElement.insertAdjacentElement("afterend", p);
+    //         const warning = document.querySelector('.warning')
+    //         warning.innerHTML = `Please provide your correct name`;
+    //         warning.style.color = 'red';
+    //         console.log(`name is not valid`);
+    //         legendElement.style.color = 'red';
+    //         // legendElement.innerHTML = `Basic Info (incorrect name field)`;
+    //     }
+    //     return nameIsValid;
+    // }
 
-    function checkEmail() {
-        const emailValue = email.value;
-        console.log(emailValue);
-        const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
-        if (!emailIsValid) {
-            const p = document.createElement('p');
-            p.className = 'warning';
-            legendElement.insertAdjacentElement("afterend", p);
-            const warning = document.querySelector('.warning')
-            warning.innerHTML = `Please provide a correct email address`;
-            warning.style.color = 'red';
-            // const emailWarningParagraph = document.querySelector('warning');
-
-            // console.log(emailWarningParagraph);
-            console.log('email not valid');
-            legendElement.style.color = 'red';
-            // legendElement.innerHTML = `Basic Info (incorrect email field)`;
-        }
-    }
+    // function checkEmail() {
+    //     const emailValue = email.value;
+    //     console.log(emailValue);
+    //     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
+    //     if (!emailIsValid) {
+    //         const p = document.createElement('p');
+    //         p.className = 'warning';
+    //         legendElement.insertAdjacentElement("afterend", p);
+    //         const warning = document.querySelector('.warning')
+    //         warning.innerHTML = `Please provide a correct email address`;
+    //         warning.style.color = 'red';
+    //         // const emailWarningParagraph = document.querySelector('warning');
+    //
+    //         // console.log(emailWarningParagraph);
+    //         console.log('email not valid');
+    //         legendElement.style.color = 'red';
+    //         // legendElement.innerHTML = `Basic Info (incorrect email field)`;
+    //     }
+    // }
 
     function validationPass(element) {
         element.parentElement.classList.add('valid');
@@ -189,6 +189,25 @@ form.addEventListener("submit", e => {
         element.parentElement.classList.add('not-valid');
         element.parentElement.classList.remove('valid');
         element.parentElement.lastElementChild.style.display = 'block';
+    }
+
+    function checkName(){
+        const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameField.value);
+        if (nameIsValid === true) {
+            validationPass(nameField);
+        } else {
+            validationFail(nameField);
+        }
+        return nameIsValid;
+    }
+
+    function emailValidator(){
+        const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
+        if (emailIsValid === true){
+            validationPass(email);
+        } else {
+            validationFail(email);
+        }
     }
 
     function checkActivities() {
@@ -203,9 +222,19 @@ form.addEventListener("submit", e => {
 
     console.log(checkActivities());
 
-    checkEmail();
-    checkName();
-    checkActivities();
+    // checkEmail();
+    // checkName();
+    // checkActivities();
+
+    if (!checkName()) {
+        console.log('Invalid name prevented submission');
+        e.preventDefault();
+    }
+
+    if (!emailValidator()) {
+        console.log('Invalid email prevented submission');
+        e.preventDefault();
+    }
 
     if (!checkActivities()) {
         console.log('Invalid language total prevented submission');
