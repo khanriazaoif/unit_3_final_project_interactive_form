@@ -153,7 +153,7 @@ form.addEventListener("submit", e => {
     //         warning.innerHTML = `Please provide your correct name`;
     //         warning.style.color = 'red';
     //         console.log(`name is not valid`);
-    //         legendElement.style.color = 'red';
+    //         legendElementdi.style.color = 'red';
     //         // legendElement.innerHTML = `Basic Info (incorrect name field)`;
     //     }
     //     return nameIsValid;
@@ -220,12 +220,6 @@ form.addEventListener("submit", e => {
         return activitiesChecked;
     }
 
-    console.log(checkActivities());
-
-    // checkEmail();
-    // checkName();
-    // checkActivities();
-
     if (!checkName()) {
         console.log('Invalid name prevented submission');
         e.preventDefault();
@@ -240,6 +234,11 @@ form.addEventListener("submit", e => {
         console.log('Invalid language total prevented submission');
         e.preventDefault();
     }
+
+
+
+
+
 });
 
 //
