@@ -17,6 +17,7 @@ const form = document.querySelector('form');
 const basicInfo = document.querySelector('.basic-info');
 const legendElement = basicInfo.firstElementChild;
 const activitiesBox = document.querySelector('#activities-box');
+const creditCardBox = document.querySelector('.credit-card-box');
 let activitiesTotal = 0;
 
 document.querySelector('#activities').addEventListener('change', event => {
@@ -142,43 +143,6 @@ document.getElementById('payment').addEventListener('change', event => {
 form.addEventListener("submit", e => {
     event.preventDefault()
 
-    // function checkName() {
-    //     const nameValue = nameField.value;
-    //     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
-    //     if (!nameIsValid) {
-    //         const p = document.createElement('p');
-    //         p.className = 'warning';
-    //         legendElement.insertAdjacentElement("afterend", p);
-    //         const warning = document.querySelector('.warning')
-    //         warning.innerHTML = `Please provide your correct name`;
-    //         warning.style.color = 'red';
-    //         console.log(`name is not valid`);
-    //         legendElementdi.style.color = 'red';
-    //         // legendElement.innerHTML = `Basic Info (incorrect name field)`;
-    //     }
-    //     return nameIsValid;
-    // }
-
-    // function checkEmail() {
-    //     const emailValue = email.value;
-    //     console.log(emailValue);
-    //     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
-    //     if (!emailIsValid) {
-    //         const p = document.createElement('p');
-    //         p.className = 'warning';
-    //         legendElement.insertAdjacentElement("afterend", p);
-    //         const warning = document.querySelector('.warning')
-    //         warning.innerHTML = `Please provide a correct email address`;
-    //         warning.style.color = 'red';
-    //         // const emailWarningParagraph = document.querySelector('warning');
-    //
-    //         // console.log(emailWarningParagraph);
-    //         console.log('email not valid');
-    //         legendElement.style.color = 'red';
-    //         // legendElement.innerHTML = `Basic Info (incorrect email field)`;
-    //     }
-    // }
-
     function validationPass(element) {
         element.parentElement.classList.add('valid');
         element.parentElement.classList.remove('non-valid');
@@ -220,6 +184,36 @@ form.addEventListener("submit", e => {
         return activitiesChecked;
     }
 
+    function checkCreditCard(){
+        const creditCardChecked = /\d{13,16}/.test(creditCardNumber.value);
+        if (creditCardChecked === true){
+            validationPass(creditCardBox);
+    } else {
+            validationFail(creditCardBox);
+    }
+    return creditCardChecked;
+    }
+
+    function checkZipCode (){
+        const creditCardZipCode = /\d{5}/.test(zipCode.value);
+        if (creditCardZipCode === true){
+            validationPass(creditCardBox);
+        } else {
+            validationFail(creditCardBox);
+        }
+        return creditCardZipCode;
+    }
+
+    function checkZipCVV (){
+        const creditCardCVV = /\d{3}/.test(cvv.value);
+        if (creditCardCVV === true){
+            validationPass(creditCardBox);
+        } else {
+            validationFail(creditCardBox);
+        }
+        return creditCardCVV;
+    }
+
     if (!checkName()) {
         console.log('Invalid name prevented submission');
         e.preventDefault();
@@ -231,33 +225,24 @@ form.addEventListener("submit", e => {
     }
 
     if (!checkActivities()) {
-        console.log('Invalid language total prevented submission');
+        console.log('Invalid activities total prevented submission');
+        e.preventDefault();
+    }
+
+    if (!checkCreditCard()) {
+        console.log('Invalid credit card prevented submission');
+        e.preventDefault();
+    }
+
+    if (!checkZipCode()) {
+        console.log('Invalid credit card zip code prevented submission');
+        e.preventDefault();
+    }
+
+    if (!checkZipCVV()) {
+        console.log('Invalid credit card CVV code prevented submission');
         e.preventDefault();
     }
 
 
-
-
-
 });
-
-//
-// activities.addEventListener("change", e => {
-//     event.preventDefault()
-//     function checkActivities() {
-//         const target = e.target
-//         console.log(target);
-//         if (checkboxes) {
-//             console.log('you checked a checkbox')
-//         } else {
-//             console.log('you did not');
-//         }
-//         const checkActivitiesValid = checkboxes > 0;
-//         console.log(checkActivitiesValid);
-//
-//         return checkActivitiesValid;
-//     }
-//
-//     checkActivities();
-// });
-
