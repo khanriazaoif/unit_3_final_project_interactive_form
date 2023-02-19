@@ -40,15 +40,15 @@ title.addEventListener('change', () => {
 color.disabled = true;
 design.addEventListener('change', () => {
     let selectTheme = design.firstElementChild
-    console.log(selectTheme);
-    selectTheme.style.display = 'none';
+    // console.log(selectTheme);
+    // selectTheme.style.display = 'none';
     design.firstElementChild =
         color.disabled = false;
     let selectedHidden = color.firstElementChild;
     // console.log(design);
     if (design.value === 'js puns') {
         for (let i = 0; i < option.length; i++) {
-            selectTheme.style.display = 'none';
+            // selectTheme.style.display = 'none';
             option[i].style.display = 'block';
             let selectedHidden = color.firstElementChild;
             // console.log(selectedHidden[i]);
@@ -57,7 +57,7 @@ design.addEventListener('change', () => {
             // console.log(selectedHidden);
             if (jspunsOption === 'heart js') {
 
-                console.log(option[i]);
+                // console.log(option[i]);
                 selectedHidden.style.display = 'none';
                 selectTheme.style.display = 'none';
                 option[i].style.display = 'none';
@@ -188,7 +188,7 @@ form.addEventListener("submit", e => {
     }
 
     function checkCreditCard(){
-        const creditCardChecked = /\d{13,16}/.test(creditCardNumber.value);
+        const creditCardChecked = /^\d{13,16}$/.test(creditCardNumber.value);
         if (creditCardChecked === true){
             validationPass(creditCardNumber);
     } else {
@@ -198,7 +198,7 @@ form.addEventListener("submit", e => {
     }
 
     function checkZipCode (){
-        const creditCardZipCode = /\d{5}/.test(zipCode.value);
+        const creditCardZipCode = /^\d{5}$/.test(zipCode.value);
         if (creditCardZipCode === true){
             validationPass(zipCode);
         } else {
@@ -208,7 +208,7 @@ form.addEventListener("submit", e => {
     }
 
     function checkZipCVV (){
-        const creditCardCVV = /\d{3}/.test(cvv.value);
+        const creditCardCVV = /^\d{3}$/.test(cvv.value);
         if (creditCardCVV === true){
             validationPass(cvv);
         } else {
