@@ -250,11 +250,11 @@ form.addEventListener("submit", e => {
 
 function accessibility(){
     for (let i = 0; i < checkboxesInput.length; i++){
-        activitiesBox.addEventListener("focus", (e) =>{
+        checkboxesInput[i].addEventListener("focus", (e) =>{
             console.log('focus ON');
             checkboxesInput[i].parentElement.classList.add('focus');
         });
-        activitiesBox.addEventListener("blur", e =>{
+        checkboxesInput[i].addEventListener("blur", e =>{
             checkboxesInput[i].parentElement.classList.remove('focus');
             console.log('remove Focus');
 
