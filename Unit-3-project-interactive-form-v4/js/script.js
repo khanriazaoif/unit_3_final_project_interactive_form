@@ -19,6 +19,7 @@ const legendElement = basicInfo.firstElementChild;
 const activitiesBox = document.querySelector('#activities-box');
 const creditCardBox = document.querySelector('.credit-card-box');
 let activitiesTotal = 0;
+const checkboxesInput = document.querySelectorAll('input[type="checkbox"]');
 
 document.querySelector('#activities').addEventListener('change', event => {
     (event.target.checked) ? activitiesTotal++ : activitiesTotal--;
@@ -141,7 +142,7 @@ document.getElementById('payment').addEventListener('change', event => {
 });
 
 form.addEventListener("submit", e => {
-    event.preventDefault()
+    // event.preventDefault()
 
     function validationPass(element) {
         element.parentElement.classList.add('valid');
@@ -246,3 +247,19 @@ form.addEventListener("submit", e => {
 
 
 });
+
+function accessibility(){
+    for (let i = 0; i < checkboxesInput.length; i++){
+        activitiesBox.addEventListener("focus", (e) =>{
+            console.log('focus ON');
+            checkboxesInput[i].parentElement.classList.add('focus');
+        });
+        activitiesBox.addEventListener("blur", e =>{
+            checkboxesInput[i].parentElement.classList.remove('focus');
+            console.log('remove Focus');
+
+        });
+    }
+}
+
+accessibility();
