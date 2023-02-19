@@ -1,3 +1,5 @@
+// Declared the global variables above
+
 const nameField = document.getElementById('name');
 const jobRole = document.getElementById('other-job-role');
 const title = document.getElementById('title');
@@ -20,14 +22,20 @@ const activitiesBox = document.querySelector('#activities-box');
 const creditCardBox = document.querySelector('.credit-card-box');
 let activitiesTotal = 0;
 const checkboxesInput = document.querySelectorAll('input[type="checkbox"]');
+const checkboxes = document.querySelectorAll('.activities input');
+const paragraphActivitiesCost = document.querySelector('.activities-cost');
+let totalCostOfActivities = 0;
 
+// event Listener on the activity checkboxes to show if no activities checked or if more than one is
 document.querySelector('#activities').addEventListener('change', event => {
     (event.target.checked) ? activitiesTotal++ : activitiesTotal--;
 });
 
+// Step 3, set focus on the name field
 nameField.focus();
-jobRole.style.display = 'none';
 
+// Step 4, job role section, the other option shows a new block that says "Other Job Role". If you select another job role this block disappears.
+jobRole.style.display = 'none';
 title.addEventListener('change', () => {
     if (title.value === 'other') {
         jobRole.style.display = 'block';
@@ -37,67 +45,28 @@ title.addEventListener('change', () => {
     }
 });
 
+// Step 5, T-Shirt Info section, the when design is changed to JS Hearts, or JS Puns, the
+// drop down changes accordingly
 color.disabled = true;
-design.addEventListener('change', () => {
-    let selectTheme = design.firstElementChild
-    // console.log(selectTheme);
-    // selectTheme.style.display = 'none';
-    design.firstElementChild =
-        color.disabled = false;
-    let selectedHidden = color.firstElementChild;
-    // console.log(design);
-    if (design.value === 'js puns') {
-        for (let i = 0; i < option.length; i++) {
-            // selectTheme.style.display = 'none';
-            option[i].style.display = 'block';
-            let selectedHidden = color.firstElementChild;
-            // console.log(selectedHidden[i]);
-            let jspunsOption = option[i].getAttribute('data-theme');
-            // console.log(jspunsOption);
-            // console.log(selectedHidden);
-            if (jspunsOption === 'heart js') {
-
-                // console.log(option[i]);
-                selectedHidden.style.display = 'none';
-                selectTheme.style.display = 'none';
-                option[i].style.display = 'none';
-            }
-
+design.addEventListener('change', function () {
+    color.disabled = false;
+    for (let option of color.options) {
+        const theme = option.getAttribute('data-theme');
+        if (theme !== this.value) {
+            option.hidden = true;
+        } else {
+            option.hidden = false;
         }
     }
-
-
-
-    if (design.value === 'heart js') {
-        for (let i = 0; i < option.length; i++) {
-            let selectTheme = design.firstElementChild
-            console.log(selectTheme);
-            option[i].style.display = 'block';
-            let heartjsOption = option[i].getAttribute('data-theme');
-            if (heartjsOption === 'js puns') {
-                selectedHidden.style.display = 'none';
-                selectTheme.style.display = 'none';
-                option[i].style.display = 'none';
-
-            }
-        }
-    }
-
+    color.querySelector(`[data-theme="${this.value}"]`).selected = true;
 });
 
-
-const checkboxes = document.querySelectorAll('.activities input');
-const paragraphActivitiesCost = document.querySelector('.activities-cost');
-// console.log(checkboxes);
-// console.log(paragraphActivitiesCost);
-let totalCostOfActivities = 0;
-
-
+// Step 6, Register for Activities Section. Below is a listener on the activities ID. This code selects the data-cost attribute
+// and then adds or minuses the cost of the courses.
 document.querySelector('.activities').addEventListener('change', e => {
     const clicked = e.target;
     let clickedType = clicked.getAttribute('data-cost');
     clickedType = Number(clickedType);
-    // console.log(typeof (clickedType));
     if (clicked.checked) {
         totalCostOfActivities += clickedType;
     }
@@ -105,24 +74,20 @@ document.querySelector('.activities').addEventListener('change', e => {
         totalCostOfActivities -= clickedType;
     }
     console.log(totalCostOfActivities);
-    // paragraphActivitiesCost.innerHTML('hell o' );
     paragraphActivitiesCost.innerHTML = `Total: $${totalCostOfActivities}`;
-    // console.log(paragraphActivitiesCost);
 });
 
-// console.log(design);
-// console.log(payment);
 
-
+// Step 7, Payment Info Section, this is where the 3 drop downs for CC, Paypal, and Bitcoin are selected
+// If you select CC then the related fields show. If you select Paypal, or Bitcoin then the
+// credit card fields disappear.
 paypal.style.display = 'none';
 bitcoin.style.display = 'none';
 
-// console.log(payment);
 let creditCardInitial = payment.children
 creditCardInitial = creditCardInitial[1];
 
 creditCardInitial.setAttribute('selected', 'selected');
-// console.log(creditCardInitial);
 
 document.getElementById('payment').addEventListener('change', event => {
     let target = event.target;
@@ -132,7 +97,6 @@ document.getElementById('payment').addEventListener('change', event => {
         paypal.style.display = 'none';
         console.log('yes');
     } else if (payment.value === 'paypal') {
-        // let paypal = document.getElementById('payment').value
         paypal.style.display = 'block';
         bitcoin.style.display = 'none';
         creditCard.style.display = 'none';
@@ -143,8 +107,11 @@ document.getElementById('payment').addEventListener('change', event => {
     }
 });
 
+
+// Step 8th, Form Validation, this is a event listener on the form for the name, email, activities,
+// CC card number, Zip Code, and CVV, that checks that everything is valid or not depending on the
+// regex statements below.
 form.addEventListener("submit", e => {
-    // event.preventDefault()
 
     function validationPass(element) {
         element.parentElement.classList.add('valid');
@@ -217,6 +184,7 @@ form.addEventListener("submit", e => {
         return creditCardCVV;
     }
 
+    // These if statements call the functions above, and prevent the form from submitting if incorrect
     if (!checkName()) {
         console.log('Invalid name prevented submission');
         e.preventDefault();
@@ -250,6 +218,7 @@ form.addEventListener("submit", e => {
 
 });
 
+    // Step 9, Accessibility. Shows the focus on the activity elements
 function accessibility(){
     for (let i = 0; i < checkboxesInput.length; i++){
         checkboxesInput[i].addEventListener("focus", (e) =>{
