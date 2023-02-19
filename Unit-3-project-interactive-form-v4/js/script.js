@@ -188,9 +188,9 @@ form.addEventListener("submit", e => {
     function checkCreditCard(){
         const creditCardChecked = /\d{13,16}/.test(creditCardNumber.value);
         if (creditCardChecked === true){
-            validationPass(creditCardBox);
+            validationPass(creditCardNumber);
     } else {
-            validationFail(creditCardBox);
+            validationFail(creditCardNumber);
     }
     return creditCardChecked;
     }
@@ -198,9 +198,9 @@ form.addEventListener("submit", e => {
     function checkZipCode (){
         const creditCardZipCode = /\d{5}/.test(zipCode.value);
         if (creditCardZipCode === true){
-            validationPass(creditCardBox);
+            validationPass(zipCode);
         } else {
-            validationFail(creditCardBox);
+            validationFail(zipCode);
         }
         return creditCardZipCode;
     }
@@ -208,9 +208,9 @@ form.addEventListener("submit", e => {
     function checkZipCVV (){
         const creditCardCVV = /\d{3}/.test(cvv.value);
         if (creditCardCVV === true){
-            validationPass(creditCardBox);
+            validationPass(cvv);
         } else {
-            validationFail(creditCardBox);
+            validationFail(cvv);
         }
         return creditCardCVV;
     }
