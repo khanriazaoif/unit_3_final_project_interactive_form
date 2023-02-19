@@ -32,6 +32,8 @@ title.addEventListener('change', () => {
     if (title.value === 'other') {
         jobRole.style.display = 'block';
         console.log('other');
+    } else {
+        jobRole.style.display = 'none';
     }
 });
 
