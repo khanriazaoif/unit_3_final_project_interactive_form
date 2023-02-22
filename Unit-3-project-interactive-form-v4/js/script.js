@@ -1,4 +1,4 @@
-// Declared the global variables above
+// Declared the global variables below
 
 const nameField = document.getElementById('name');
 const jobRole = document.getElementById('other-job-role');
@@ -39,13 +39,12 @@ jobRole.style.display = 'none';
 title.addEventListener('change', () => {
     if (title.value === 'other') {
         jobRole.style.display = 'block';
-        console.log('other');
     } else {
         jobRole.style.display = 'none';
     }
 });
 
-// Step 5, T-Shirt Info section, the when design is changed to JS Hearts, or JS Puns, the
+// Step 5, T-Shirt Info section, when design is changed to JS Hearts, or JS Puns, the
 // drop down changes accordingly
 color.disabled = true;
 design.addEventListener('change', function () {
@@ -73,7 +72,6 @@ document.querySelector('.activities').addEventListener('change', e => {
     if (clicked.checked === false) {
         totalCostOfActivities -= clickedType;
     }
-    console.log(totalCostOfActivities);
     paragraphActivitiesCost.innerHTML = `Total: $${totalCostOfActivities}`;
 });
 
@@ -142,6 +140,7 @@ form.addEventListener("submit", e => {
         } else {
             validationFail(email);
         }
+        return emailIsValid
     }
 
     function checkActivities() {
@@ -222,12 +221,10 @@ form.addEventListener("submit", e => {
 function accessibility(){
     for (let i = 0; i < checkboxesInput.length; i++){
         checkboxesInput[i].addEventListener("focus", (e) =>{
-            console.log('focus ON');
             checkboxesInput[i].parentElement.classList.add('focus');
         });
         checkboxesInput[i].addEventListener("blur", e =>{
             checkboxesInput[i].parentElement.classList.remove('focus');
-            console.log('remove Focus');
 
         });
     }
