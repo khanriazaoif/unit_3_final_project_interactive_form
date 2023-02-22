@@ -242,7 +242,7 @@ button:hover {
 }
 
 .not-valid legend {
-    color: red;
+    color: red;/ bottom:;
 }
 
 .valid::after {

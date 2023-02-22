@@ -113,7 +113,7 @@ form.addEventListener("submit", e => {
 
     function validationPass(element) {
         element.parentElement.classList.add('valid');
-        element.parentElement.classList.remove('non-valid');
+        element.parentElement.classList.remove('not-valid');
         element.parentElement.lastElementChild.style.display = 'none';
     }
 
