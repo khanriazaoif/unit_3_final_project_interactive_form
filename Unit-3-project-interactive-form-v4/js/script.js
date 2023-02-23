@@ -199,17 +199,17 @@ form.addEventListener("submit", e => {
         e.preventDefault();
     }
 
-    if (!checkCreditCard()) {
+    if (!checkCreditCard() && payment.value === 'credit-card') {
         console.log('Invalid credit card prevented submission');
         e.preventDefault();
     }
 
-    if (!checkZipCode()) {
+    if (!checkZipCode() && payment.value === 'credit-card') {
         console.log('Invalid credit card zip code prevented submission');
         e.preventDefault();
     }
 
-    if (!checkZipCVV()) {
+    if (!checkZipCVV() && payment.value === 'credit-card') {
         console.log('Invalid credit card CVV code prevented submission');
         e.preventDefault();
     }
